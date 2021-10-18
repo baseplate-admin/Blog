@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+            {% if page.seo_title %} {{ page.seo_title }} {% else %}
+            {{page.title}} {% endif %}
+        </title>
+
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'fonts/Ubuntu/Ubuntu.css' %}"
+        />
+
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'fonts/Cantarell/Cantarell.css' %}"
+        />
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'fonts/Roboto/Roboto.css' %}"
+        />
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'fonts/Lato/Lato.css' %}"
+        />
+
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'vendor/bulma/bulma.min.css' %}"
+        />
+
+        <link async rel="stylesheet" defer href="{% static 'css/root.css' %}" />
+        <link async rel="stylesheet" defer href="{% static 'css/main.css' %}" />
+
+        <link
+            rel="stylesheet"
+            defer
+            href="{% static 'vendor/tippy/tippy.css' %}"
+        />
+        <link
+            defer
+            rel="stylesheet"
+            href="{% static 'vendor/progressive-image/progressive-image.css' %}"
+        />
+
+        {% block head %} {% endblock %}
+    </head>
+    <body>
+        {% block body %} {% endblock %}
+
+        <script defer src="{% static 'vendor/animejs/anime.min.js' %}"></script>
+        <script
+            defer
+            type="module"
+            src="{% static 'vendor/ionicons/ionicons.esm.js' %}"
+        ></script>
+        <script
+            defer
+            nomodule
+            src="{% static 'vendor/ionicons/ionicons.js' %}"
+        ></script>
+
+        <script
+            defer
+            src="{% static 'vendor/particles.js/particles.min.js' %}"
+        ></script>
+
+        <script
+            defer
+            src="{% static 'vendor/progressive-image/progressive-image.js' %}"
+        ></script>
+
+        <script defer src="{% static 'vendor/tippy/popper.min.js' %}"></script>
+        <script
+            defer
+            src="{% static 'vendor/tippy/tippy.umd.min.js' %}"
+        ></script>
+
+        <script
+            defer
+            src="{% static 'vendor/alpine/collapse.min.js' %}"
+        ></script>
+        <script defer src="{% static 'vendor/alpine/trap.min.js' %}"></script>
+        <script defer src="{% static 'vendor/alpine/alpine.min.js' %}"></script>
+
+        <script>
+            document.addEventListener('alpine:init', () => {
+                // Create a condition that targets viewports at least 768px wide
+                const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+                function handleWindowChange(e) {
+                    // Check if the media query is true
+                    return e.matches;
+                }
+                // Change the store's value
+                window.addEventListener('resize', () => {
+                    switch (handleWindowChange(mediaQuery)) {
+                        case true:
+                            Alpine.store('is_mobile', true);
+                            break;
+                        case false:
+                            Alpine.store('is_mobile', false);
+                            break;
+                    }
+                });
+
+                // Init the store.
+                Alpine.store('is_mobile', handleWindowChange(mediaQuery));
+            });
+        </script>
+    </body>
+</html>

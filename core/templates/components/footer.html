@@ -1,0 +1,19 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/footer/footer.css' %}" />
+<div
+    class="mt-2 is-relative"
+    x-init=" 
+            () => {
+                particlesJS.load('footer-particle-div', '{% static 'vendor/particles.js/particlesjs-config.json' %}', () => {});
+            };
+        "
+>
+    <div id="footer-particle-div"></div>
+
+    <div class="container has-text-centered heading" id="footer-item">
+        &#169; Copyright
+        {{settings.site_settings.SiteOwnerShipSettings.copyright}} - Website
+        released under GPL-V3 license.
+    </div>
+</div>

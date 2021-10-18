@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+# Wagtail
+wagtail = "*" #<2.15,>=2.14.1
+# Django 
+django = ">=3.2.8"
+pytz = "*" # Because Pytz is deprecated
+whitenoise = {version = "*", extras = ["brotli"]}
+# Uvicorn
+uvicorn = "*"
+watchgod = "*" 
+wsproto  = "*"
+httptools = { markers = "sys_platform != 'win32'"} 
+uvloop = { markers = "sys_platform != 'win32'"}
+
+[dev-packages]
+black = "*"
+
+[requires]
+python_version = "3.10"
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+dev = "uvicorn core.asgi:application --host 127.0.0.1 --port 8000 --reload"
+purge = 'python ./manage.py remove_unnecessary_files'

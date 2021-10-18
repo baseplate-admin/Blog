@@ -1,0 +1,81 @@
+{% extends 'base.html' %}{#<!--prettier-ignore-->#}
+{% load static wagtailcore_tags wagtailimages_tags wagtailadmin_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/blog/blog_details.css' %}" />
+{% endblock %} {#<!--prettier-ignore-->#}
+
+{% block body %}
+
+<!-- START NAV -->
+{% include 'components/navbar.html' %}
+<!-- END NAV -->
+
+{% image self.blog_image original as img %}
+<section class="hero is-medium is-bold">
+    <div
+        class="hero-body"
+        x-init="
+            () => { 
+                $el.style.backgroundImage = 'url({{ img.url }})'
+            }
+        "
+    >
+        <div class="container has-text-centered">
+            <h1 class="title"></h1>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <!-- START ARTICLE FEED -->
+    <section class="articles">
+        <div class="column is-8 is-offset-2">
+            <!-- START ARTICLE -->
+            <div class="card article">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content has-text-centered is-clipped">
+                            <p class="title article-title">{{self.title}}</p>
+                            <div class="columns is-mobile is-centered">
+                                <div class="is-narrow">
+                                    <figure class="image is-64x64">
+                                        <a
+                                            href="{% avatar_url self.owner %}"
+                                            style="border-radius: 99999px"
+                                            class="progressive replace"
+                                        >
+                                            <img
+                                                src="{%static 'images/placeholder.png'%}"
+                                                class="preview is-rounded"
+                                                alt="{{ self.owner }}"
+                                            />
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="tags has-addons level-item">
+                                <span class="tag is-rounded is-dark"
+                                    >@{{self.owner}}</span
+                                >
+                                <span class="tag is-rounded is-info">
+                                    {{ self.latest_revision_created_at }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content article-body">
+                        {#<!--prettier-ignore-->#}
+                            {% for block in self.content %}
+                                {% include_block block %}
+                            {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- END ARTICLE -->
+        </div>
+    </section>
+    <!-- END ARTICLE FEED -->
+</div>
+
+{% endblock body%}

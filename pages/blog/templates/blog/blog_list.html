@@ -1,0 +1,163 @@
+{% extends 'base.html' %} {#<!--prettier-ignore-->#}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/blog/blog_list.css' %}" />
+{%endblock%} {#<!--prettier-ignore-->#}
+{% block body %}
+
+<section class="hero is-fullheight">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">{% include 'components/navbar.html' %}</div>
+
+    <!-- Hero content: will be in the middle -->
+    <div
+        class="hero-body is-flex-direction-column is-relative"
+        x-init=" 
+            () => {
+                particlesJS.load('particles_div', '{% static 'vendor/particles.js/particlesjs-config.json' %}', () => {});
+            };
+        "
+    >
+        <div id="particles_div"></div>
+
+        <section class="hero is-medium">
+            <div class="hero-body is-justify-content-center is-unselectable">
+                <p class="title is-flex-shrink-0">
+                    <ion-icon
+                        name="cog"
+                        class="animejs__cog__icon__first"
+                        style="transform: translateY(5px)"
+                        x-init="
+                            () => {
+                                
+                                anime({
+                                    targets: '.animejs__cog__icon__first',
+                                    rotate: 360,
+                                    easing: 'easeInOutQuad',
+                                    loop: true,
+                                })
+                            }
+                    "
+                    ></ion-icon>
+                    {{settings.site_settings.SiteOwnerShipSettings.site_name}}
+                    <ion-icon
+                        name="cog"
+                        class="animejs__cog__icon__second"
+                        style="transform: translateY(5px)"
+                        x-init="
+                            () => {
+                                
+                                anime({
+                                    targets: '.animejs__cog__icon__second',
+                                    rotate: -360,
+                                    easing: 'easeInOutQuad',
+                                    loop: true,
+                                })
+                            }
+                    "
+                    ></ion-icon>
+                </p>
+            </div>
+        </section>
+    </div>
+    <div
+        class="is-relative"
+        x-init="
+        () => {
+            newShape($el)
+        }
+    "
+    ></div>
+    <div class="blog-posts">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-10 is-offset-1">
+                    <div class="columns featured-post">
+                        {%for post in posts%}
+                        <div class="column is-12 post">
+                            <article class="columns featured">
+                                <div class="column is-7 post-img">
+                                    {#<!--prettier-ignore-->#}
+                                    {% image post.blog_image fill-613x344 as large_blog_image %}
+                                    {% image post.blog_image fill-16x9 as small_blog_image %}
+
+                                    <a
+                                        href="{{ large_blog_image.url }}"
+                                        class="progressive replace"
+                                    >
+                                        <img
+                                            src="{{ small_blog_image.url }}"
+                                            class="preview"
+                                            alt="{{ blog_image.alt }}"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="column is-5 featured-content va">
+                                    <div>
+                                        <h3 class="heading post-category">
+                                            {#<!--prettier-ignore-->#}
+                                            {% for i in post.blog_category.all %}
+                                                {{ i.category.name }}
+                                            {% endfor %}
+                                        </h3>
+                                        <h1 class="title post-title">
+                                            {{ post.title }}
+                                        </h1>
+                                        <a href="{{ post.url }}">
+                                            <div
+                                                class="post-excerpt"
+                                                x-init="
+                                                    () => {
+                                                        let text = $el.innerText
+                                                        const textLength = 315
+
+                                                        text = text.substring(0, textLength)
+                                                        
+                                                        if (text.length === textLength) {
+                                                            text += ' ...'
+                                                        }
+
+                                                        $el.innerHTML = ''
+                                                        
+                                                        const element = document.createElement('p')
+
+                                                        element.textDecoration = 'None'
+                                                        element.style.lineHeight = '1.5rem';
+                                                        element.style.letterSpacing = '0.03rem';
+                                                        element.style.fontFamily = `'Lato', sans-serif`;
+                                                        element.style.color = 'white';
+                                                        element.style.opacity = '0.85';
+                                                        element.style.fontWeight = 'lighter'
+
+                                                        element.innerHTML = text
+
+                                                        $el.attachShadow({mode: 'open'});
+                                                        $el.shadowRoot.appendChild(element)                                           
+                                                    }
+                                                "
+                                            >
+                                                {#<!--prettier-ignore-->#}
+                                            {% for block in post.content %}
+                                                {% include_block block %} 
+                                            {% endfor %}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero footer: will stick at the bottom -->
+    <div class="hero-foot">{% include 'components/footer.html' %}</div>
+</section>
+
+{# Javascript #}
+<script async src="{%static 'js/blog/shapeDividerShadowDom.js' %}"></script>
+
+{% endblock %}

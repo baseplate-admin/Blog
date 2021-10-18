@@ -1,0 +1,50 @@
+#particles_div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    position: absolute;
+    z-index: 10000;
+}
+
+.title {
+    color: white !important;
+    opacity: 0.95;
+}
+
+.blog-posts {
+    min-height: calc(100vh - 521px);
+    background: hsl(0, 0%, 5%);
+    padding-top: 4rem;
+    padding-bottom: 10rem;
+}
+
+.blog-posts article {
+    padding-top: 4em !important;
+    padding: 1.5rem;
+}
+
+.blog-posts .post img {
+    border-radius: 6px;
+}
+
+.blog-posts .post .post-category {
+    color: #5f98f2;
+}
+
+.blog-posts .post .post-title {
+    font-family: 'Roboto', serif;
+    font-size: 2.2rem;
+    opacity: 0.9;
+}
+
+.blog-posts .post .featured .featured-image img {
+    height: 380px;
+}
+
+/* Side Effect migration */
+.blog-posts .post-excerpt p {
+    opacity: 0 !important; /* Hide ugly text until Alpine Finishes pharsing it */
+}
