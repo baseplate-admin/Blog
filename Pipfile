@@ -16,9 +16,9 @@ minify-html = "*"
 uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
 # Gunicorn
 gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]}
+black = "*"
 
 [dev-packages]
-black = "*"
 
 [requires]
 python_version = "3.9"

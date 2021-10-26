@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand
 
+
 class Command(BaseCommand):
     help = "Remove unnecessary files generated from Whitenoise"
 
@@ -16,18 +17,14 @@ class Command(BaseCommand):
 
         self.json_data: object = self.__load_json()
 
-
     def __load_json(self) -> object:
-        '''
-        
-        '''
         if os.path.isdir(self.static_dir):
             shutil.rmtree(self.static_dir)
-        management.call_command('collectstatic')
+        management.call_command("collectstatic")
         return json.load(
             open(os.path.join(settings.BASE_DIR, "static", "staticfiles.json"))
         )
-        
+
     def __remove_and_add(self, path: str) -> None:
         try:
             os.remove(path)
@@ -36,12 +33,16 @@ class Command(BaseCommand):
             if os.path.isfile(path):
                 self.count -= 1
 
-    def handle(self, *args, **kwargs):
+    def handle(self):
         for file in self.json_data["paths"]:
             self.__remove_and_add(os.path.join(self.static_dir, file))
             self.__remove_and_add(os.path.join(self.static_dir, f"{file}.br"))
             self.__remove_and_add(os.path.join(self.static_dir, f"{file}.gz"))
 
         print(
-            f"\nRemoved : {self.count} files \n |> From '{os.path.join(settings.BASE_DIR, 'static')}' \n |> Using '{os.path.join(settings.BASE_DIR, 'static', 'staticfiles.json')}'\n"
+            f"""
+            Removed : {self.count} files 
+                |> From '{ os.path.join(settings.BASE_DIR, 'static') }' 
+                |> Using '{ os.path.join(settings.BASE_DIR, 'static', 'staticfiles.json') }'
+            """
         )
