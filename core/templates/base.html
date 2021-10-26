@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% spaceless %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,43 +13,53 @@
         <link
             async
             rel="stylesheet"
-            href="{% static 'fonts/Ubuntu/Ubuntu.css' %}"
+            href="{% static 'core/fonts/Ubuntu/Ubuntu.css' %}"
         />
 
         <link
             async
             rel="stylesheet"
-            href="{% static 'fonts/Cantarell/Cantarell.css' %}"
+            href="{% static 'core/fonts/Cantarell/Cantarell.css' %}"
         />
         <link
             async
             rel="stylesheet"
-            href="{% static 'fonts/Roboto/Roboto.css' %}"
+            href="{% static 'core/fonts/Roboto/Roboto.css' %}"
         />
         <link
             async
             rel="stylesheet"
-            href="{% static 'fonts/Lato/Lato.css' %}"
+            href="{% static 'core/fonts/Lato/Lato.css' %}"
         />
 
         <link
             async
             rel="stylesheet"
-            href="{% static 'vendor/bulma/bulma.min.css' %}"
+            href="{% static 'core/vendor/bulma/bulma.min.css' %}"
         />
 
-        <link async rel="stylesheet" defer href="{% static 'css/root.css' %}" />
-        <link async rel="stylesheet" defer href="{% static 'css/main.css' %}" />
+        <link
+            async
+            rel="stylesheet"
+            defer
+            href="{% static 'core/css/root.css' %}"
+        />
+        <link
+            async
+            rel="stylesheet"
+            defer
+            href="{% static 'core/css/main.css' %}"
+        />
 
         <link
             rel="stylesheet"
             defer
-            href="{% static 'vendor/tippy/tippy.css' %}"
+            href="{% static 'core/vendor/tippy/tippy.css' %}"
         />
         <link
             defer
             rel="stylesheet"
-            href="{% static 'vendor/progressive-image/progressive-image.css' %}"
+            href="{% static 'core/vendor/progressive-image/progressive-image.css' %}"
         />
 
         {% block head %} {% endblock %}
@@ -57,40 +67,52 @@
     <body>
         {% block body %} {% endblock %}
 
-        <script defer src="{% static 'vendor/animejs/anime.min.js' %}"></script>
+        <script
+            defer
+            src="{% static 'core/vendor/animejs/anime.min.js' %}"
+        ></script>
         <script
             defer
             type="module"
-            src="{% static 'vendor/ionicons/ionicons.esm.js' %}"
+            src="{% static 'core/vendor/ionicons/ionicons.esm.js' %}"
         ></script>
         <script
             defer
             nomodule
-            src="{% static 'vendor/ionicons/ionicons.js' %}"
+            src="{% static 'core/vendor/ionicons/ionicons.js' %}"
         ></script>
 
         <script
             defer
-            src="{% static 'vendor/particles.js/particles.min.js' %}"
+            src="{% static 'core/vendor/particles.js/particles.min.js' %}"
         ></script>
 
         <script
             defer
-            src="{% static 'vendor/progressive-image/progressive-image.js' %}"
-        ></script>
-
-        <script defer src="{% static 'vendor/tippy/popper.min.js' %}"></script>
-        <script
-            defer
-            src="{% static 'vendor/tippy/tippy.umd.min.js' %}"
+            src="{% static 'core/vendor/progressive-image/progressive-image.js' %}"
         ></script>
 
         <script
             defer
-            src="{% static 'vendor/alpine/collapse.min.js' %}"
+            src="{% static 'core/vendor/tippy/popper.min.js' %}"
         ></script>
-        <script defer src="{% static 'vendor/alpine/trap.min.js' %}"></script>
-        <script defer src="{% static 'vendor/alpine/alpine.min.js' %}"></script>
+        <script
+            defer
+            src="{% static 'core/vendor/tippy/tippy.umd.min.js' %}"
+        ></script>
+
+        <script
+            defer
+            src="{% static 'core/vendor/alpine/collapse.min.js' %}"
+        ></script>
+        <script
+            defer
+            src="{% static 'core/vendor/alpine/trap.min.js' %}"
+        ></script>
+        <script
+            defer
+            src="{% static 'core/vendor/alpine/alpine.min.js' %}"
+        ></script>
 
         <script>
             document.addEventListener('alpine:init', () => {
@@ -119,3 +141,4 @@
         </script>
     </body>
 </html>
+{% endspaceless %}

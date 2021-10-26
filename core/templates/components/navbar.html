@@ -1,6 +1,6 @@
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/navbar/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'core/css/navbar/navbar.css' %}" />
 
 <nav
     class="navbar container"
@@ -31,7 +31,11 @@
         "
     >
         <a class="navbar-item is-clickable" href="https://bulma.io">
-            <img src="{% static 'images/logo.png' %}" width="112" height="28" />
+            <img
+                src="{% static 'core/images/logo.png' %}"
+                width="112"
+                height="28"
+            />
         </a>
 
         <a
@@ -417,7 +421,7 @@
                 <figure class="image is-48x48 pt-2 pl-2">
                     <img
                         class="is-rounded"
-                        src="{% static 'images/placeholder.png' %}"
+                        src="{% static 'core/images/placeholder.png' %}"
                     />
                 </figure>
                 {% else %}

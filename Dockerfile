@@ -50,7 +50,7 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 
 # Collect static files.
-RUN python manage.py collectstatic --noinput --clear
+RUN pipenv run collectstatic
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:

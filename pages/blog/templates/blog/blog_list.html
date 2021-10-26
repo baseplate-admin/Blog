@@ -2,7 +2,7 @@
 {% load static wagtailimages_tags wagtailcore_tags %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/blog/blog_list.css' %}" />
+<link rel="stylesheet" href="{% static 'blog/css/blog_list.css' %}" />
 {%endblock%} {#<!--prettier-ignore-->#}
 {% block body %}
 
@@ -15,7 +15,7 @@
         class="hero-body is-flex-direction-column is-relative"
         x-init=" 
             () => {
-                particlesJS.load('particles_div', '{% static 'vendor/particles.js/particlesjs-config.json' %}', () => {});
+                particlesJS.load('particles_div', '{% static 'core/vendor/particles.js/particlesjs-config.json' %}', () => {});
             };
         "
     >
@@ -40,7 +40,7 @@
                             }
                     "
                     ></ion-icon>
-                    {{settings.site_settings.SiteOwnerShipSettings.site_name}}
+                    {{ page.title }}
                     <ion-icon
                         name="cog"
                         class="animejs__cog__icon__second"
@@ -73,8 +73,9 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-10 is-offset-1">
+                    {% for post in posts %}
+
                     <div class="columns featured-post">
-                        {%for post in posts%}
                         <div class="column is-12 post">
                             <article class="columns featured">
                                 <div class="column is-7 post-img">
@@ -147,10 +148,52 @@
                                 </div>
                             </article>
                         </div>
-                        {%endfor%}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
+            {% if posts.paginator.num_pages > 1 %}
+
+            <nav
+                class="pagination is-rounded is-small"
+                role="navigation"
+                aria-label="pagination"
+            >
+                {% if posts.has_previous %}
+                <a
+                    class="pagination-previous"
+                    href="?page={{ posts.previous_page_number }}"
+                    >Previous</a
+                >
+                {% endif %} {#<!--prettier-ignore-->#}
+                {% if posts.has_next %}
+                <a
+                    class="pagination-next"
+                    href="?page={{ posts.next_page_number }}"
+                    >Next page</a
+                >
+                {% endif %} {#<!--prettier-ignore-->#}
+                <ul class="pagination-list">
+                    {% for page_num in posts.paginator.page_range %}
+                    <li>
+                        <a
+                            class="pagination-link"
+                            href="?page={{ page_num }}"
+                            x-init="
+                                ()=>{
+                                    if (Number($el.textContent) === {{ posts.number }}) {
+                                        $el.classList.add('is-current')
+                                    }  
+                                }
+                            "
+                            aria-label="Goto page {{ page_num }}"
+                            >{{ page_num }}</a
+                        >
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            {% endif %}
         </div>
     </div>
     <!-- Hero footer: will stick at the bottom -->
@@ -158,6 +201,6 @@
 </section>
 
 {# Javascript #}
-<script async src="{%static 'js/blog/shapeDividerShadowDom.js' %}"></script>
+<script async src="{%static 'blog/js/shapeDividerShadowDom.js' %}"></script>
 
 {% endblock %}

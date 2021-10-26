@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    ## Wagtail Pages
     "pages.home",
     "pages.blog",
     "pages.authentication",
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     # Wagtail 3rd Party (Unofficial)
-    # Django
+    ## Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -69,8 +70,13 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    ## Extra Django Middlewares
+    "django.middleware.gzip.GZipMiddleware",
+    ## 3rd party middlewares
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Wagtail
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    # Custom Middleware
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -174,11 +180,9 @@ WAGTAIL_SITE_NAME = "core"
 # BASE_URL = "http://example.com"
 
 # Django new method
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Use Libravatar
 # Gravatar is not open-source.
-# So we are using Libravatar.
+# So we are using Libravatar. +1 for being Django Based too
 
 WAGTAIL_GRAVATAR_PROVIDER_URL = "//seccdn.libravatar.org/avatar/"

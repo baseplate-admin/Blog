@@ -31,7 +31,7 @@ class BlogList(Page):
 
         all_posts = BlogDetails.objects.live().public().order_by("-first_published_at")
 
-        paginator = Paginator(all_posts, 1)
+        paginator = Paginator(all_posts, 5) # @todo add more pages
         page = request.GET.get("page")
 
         try:

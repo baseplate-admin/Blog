@@ -1,0 +1,64 @@
+html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: black;
+}
+
+.login-box {
+    background-color: transparent;
+    border: 1.95px solid var(--border-color);
+}
+
+.icon-box {
+    background-color: transparent;
+}
+
+.items {
+    padding: 0.4em;
+}
+
+.input {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: white;
+}
+
+.input::placeholder {
+    color: white;
+    opacity: 0.75;
+    font-family: 'Ubuntu';
+}
+
+.button {
+    border-color: var(--button-border-color) !important;
+    border-width: 1.8px;
+    text-decoration: none !important;
+    color: hsl(0, 0%, 85%) !important;
+    transition: 0.2s;
+}
+
+.button:hover {
+    background-color: var(--button-color-hover) !important;
+}
+
+.level {
+    transition: 0.2s;
+}
+.new_here_tag {
+    font-family: 'Cantarell';
+    color: white;
+    opacity: 0.85;
+}
+
+.href_tag {
+    text-decoration: none;
+    font-family: 'Cantarell';
+}
+
+.href_tag:hover {
+    color: #3273dc;
+}
+
+.error {
+    color: var(--error-message-color);
+}
