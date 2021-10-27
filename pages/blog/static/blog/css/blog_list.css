@@ -48,7 +48,9 @@ canvas {
 .blog-posts .post-excerpt p {
     opacity: 0 !important; /* Hide ugly text until Alpine Finishes pharsing it */
 }
-
+.blog-posts hr {
+    background-color: hsl(0, 0%, 30%);
+}
 /* Paginator */
 
 .pagination a {
