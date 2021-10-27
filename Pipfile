@@ -4,21 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# Python
 # Wagtail
 wagtail = "*" # <2.15,>=2.14.1
+wagtail-cache = "*" # Cache middleware
 # Django 
-django = "*"
-# 3rd party
-whitenoise = {version = "*", extras = ["brotli"]}
-minify-html = "*"
-# Uvicorn
+django = "*" # 3.2.8
+whitenoise = {version = "*", extras = ["brotli"]} # Serve static files
+# Servers
 uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
-# Gunicorn
-gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]}
-black = "*"
+gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]} # To serve Gunicorn
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.9"

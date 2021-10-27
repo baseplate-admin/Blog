@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     # Wagtail 3rd Party (Unofficial)
+    "wagtailcache",
     ## Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "wagtailcache.cache.UpdateCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -76,7 +78,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     # Wagtail
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-    # Custom Middleware
+    "wagtailcache.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -170,7 +172,14 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
-
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": os.path.join(BASE_DIR, "cache"),
+        "KEY_PREFIX": "wagtailcache",
+        "TIMEOUT": 5,  # in seconds
+    }
+}
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "core"

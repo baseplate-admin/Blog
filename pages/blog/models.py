@@ -10,6 +10,8 @@ from wagtail.admin.edit_handlers import (
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from wagtailcache.cache import WagtailCacheMixin
+
 from .orderables import *
 from custom.blocks import blocks
 
@@ -17,9 +19,10 @@ from custom.blocks import blocks
 # Create your pages here.
 
 
-class BlogList(Page):
+class BlogList(WagtailCacheMixin, Page):
     # template = "blog/blog_page.html"
     max_count = 1
+    parent_page_type = ["home.Home"]
     subpage_types = ["blog.BlogDetails"]
 
     class Meta:
@@ -47,11 +50,12 @@ class BlogList(Page):
         return context
 
 
-class BlogDetails(Page):
+class BlogDetails(WagtailCacheMixin, Page):
     # template = "blog/blog_details_page.html"
     parent_page_type = [
         "blog.BlogList",  # appname.ModelName
     ]
+    subpage_types = []
 
     class Meta:
         verbose_name = "Blog Detail"
