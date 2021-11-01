@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3752c6c9a3b4eb8127b9926dd3ea240053da3a119ae13aa47e91362ca24d76ff"
+            "sha256": "a3e32ba13f4d6b46452534227a9f19a90c91bd154bfd226c6cce8d15e3d9a84d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -131,6 +131,13 @@
             "markers": "python_version >= '3.5'",
             "version": "==5.2"
         },
+        "django-strip-whitespace": {
+            "hashes": [
+                "sha256:bbef558803ae285d783a7d50437b59643f9688ac5ded64c68d345360947a1e39"
+            ],
+            "index": "pypi",
+            "version": "==0.0.6"
+        },
         "django-taggit": {
             "hashes": [
                 "sha256:dfe9e9c10b5929132041de0c00093ef0072c73c2a97d0f74a818ae50fa77149a",
@@ -204,6 +211,20 @@
                 "sha256:ea7a65b2f0935b14601a3295f2c5e5e8b54126dd1e6a7fef4e44d2b8dd5b695a"
             ],
             "version": "==2020.6.1"
+        },
+        "minify-html": {
+            "hashes": [
+                "sha256:3e6ac1211d0315d87958ddea3e7c119a23889c63c0b49cff65d6e926aac0cfb2",
+                "sha256:55a1fbf76b3c08ca3483a3924b9f66345646819c7c6a3e031a4d42130f2c3b86",
+                "sha256:ad8e7b85ca8fa651a0961dc04420521e003d5dcfd34cf63b16b1973f2c68eaf2",
+                "sha256:bb24cf0c1bcffe3160e1a3f34c94800ef9b8a447a0582cda564538bb2ae98a2a",
+                "sha256:bc7991eb1ee23693f0bff454e8ef6438ca898b6b0189dd7b602f5ab8f57baa91",
+                "sha256:bf50dda7a3e06ed8cb49006b50e0905691b584596b51c5b384308c415e1369d5",
+                "sha256:c72435f5416efe7aac53cfb01035a2f4d7d9692cf4a83a3bd59ad0509c157ee4",
+                "sha256:d0261528ce5e57b85f5ac90e30844c13cb596cddd8b67e0b8ad44f9290b3d25b",
+                "sha256:fbba1739f8d2a7ddac39e286dd04613c854acfe8d8610bb8bd6cfb7020d6314f"
+            ],
+            "version": "==0.6.10"
         },
         "openpyxl": {
             "hashes": [
@@ -323,7 +344,7 @@
                 "sha256:4987c65554f7a2dbf30c18fd48778ef124af6fab771a377103da0585e2336ece",
                 "sha256:c4fdf4019605b6e5423637e01bc9fe4daef873709a7973e195ceba0a62bbc844"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4.0'",
             "version": "==1.26.7"
         },
         "uvicorn": {
