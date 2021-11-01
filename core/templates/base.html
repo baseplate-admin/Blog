@@ -118,9 +118,14 @@
             document.addEventListener('alpine:init', () => {
                 const mediaQuery = window.matchMedia('(max-width: 768px)');
 
+                // Create a condition that targets viewports at least 768px wide
+                const mediaQuery = window.matchMedia('(max-width: 768px)');
+
                 function handleWindowChange(e) {
+                    // Check if the media query is true
                     return e.matches;
                 }
+                // Change the store's value
                 window.addEventListener('resize', () => {
                     switch (handleWindowChange(mediaQuery)) {
                         case true:
@@ -131,7 +136,7 @@
                             break;
                     }
                 });
-
+                // Init the store.
                 Alpine.store('is_mobile', handleWindowChange(mediaQuery));
             });
         </script>
