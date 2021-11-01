@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     # For Development
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    # Django 3rd Party (Official)
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [
