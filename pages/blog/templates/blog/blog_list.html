@@ -110,31 +110,31 @@
                                                 class="post-excerpt"
                                                 x-init="
                                                     () => {
-                                                        let text = $el.innerText
-                                                        const textLength = 315
+                                                        let text = $el.innerText;
+                                                        const textLength = 315;
 
-                                                        text = text.substring(0, textLength)
+                                                        text = text.substring(0, textLength);
                                                         
                                                         if (text.length === textLength) {
-                                                            text += ' ...'
+                                                            text += ' ...';
                                                         }
 
-                                                        $el.innerHTML = ''
+                                                        $el.innerHTML = '';
                                                         
-                                                        const element = document.createElement('p')
+                                                        const element = document.createElement('p');
 
-                                                        element.textDecoration = 'None'
+                                                        element.textDecoration = 'None';
                                                         element.style.lineHeight = '1.5rem';
                                                         element.style.letterSpacing = '0.03rem';
                                                         element.style.fontFamily = `'Lato', sans-serif`;
                                                         element.style.color = 'white';
                                                         element.style.opacity = '0.85';
-                                                        element.style.fontWeight = 'lighter'
+                                                        element.style.fontWeight = 'lighter';
 
-                                                        element.innerHTML = text
+                                                        element.innerHTML = text;
 
                                                         $el.attachShadow({mode: 'open'});
-                                                        $el.shadowRoot.appendChild(element)                                           
+                                                        $el.shadowRoot.appendChild(element);                                        
                                                     }
                                                 "
                                             >
@@ -183,7 +183,7 @@
                             x-init="
                                 ()=>{
                                     if (Number($el.textContent) === {{ posts.number }}) {
-                                        $el.classList.add('is-current')
+                                        $el.classList.add('is-current');
                                     }  
                                 }
                             "

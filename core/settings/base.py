@@ -79,6 +79,8 @@ MIDDLEWARE = [
     # Wagtail
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "wagtailcache.cache.FetchFromCacheMiddleware",
+    # Custom
+    "strip_whitespace.middlewares.HtmlStripWhiteSpaceMiddleware.HTMLStripWhiteSpace",
 ]
 
 ROOT_URLCONF = "core.urls"

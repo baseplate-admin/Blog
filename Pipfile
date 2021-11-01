@@ -10,6 +10,7 @@ wagtail-cache = "*" # Cache middleware
 # Django 
 django = "*" # 3.2.8
 whitenoise = {version = "*", extras = ["brotli"]} # Serve static files
+django-strip-whitespace = "*" # Remove whitespace
 # Servers
 uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
 gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]} # To serve Gunicorn
@@ -25,5 +26,5 @@ allow_prereleases = true
 
 [scripts]
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+collectstatic = "python ./manage.py collectstatic_rewired"
 dev = "python manage.py runserver"
-collectstatic = "python ./manage.py remove_unnecessary_files"

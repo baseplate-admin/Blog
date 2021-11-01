@@ -29,7 +29,7 @@ class Home(WagtailCacheMixin, Page):
         null=True,
         on_delete=models.SET_NULL,
     )
-    
+
     content = StreamField(
         [
             ("full_richtext", blocks.RichtextBlock()),

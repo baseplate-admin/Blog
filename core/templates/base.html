@@ -116,14 +116,11 @@
 
         <script>
             document.addEventListener('alpine:init', () => {
-                // Create a condition that targets viewports at least 768px wide
                 const mediaQuery = window.matchMedia('(max-width: 768px)');
 
                 function handleWindowChange(e) {
-                    // Check if the media query is true
                     return e.matches;
                 }
-                // Change the store's value
                 window.addEventListener('resize', () => {
                     switch (handleWindowChange(mediaQuery)) {
                         case true:
@@ -135,7 +132,6 @@
                     }
                 });
 
-                // Init the store.
                 Alpine.store('is_mobile', handleWindowChange(mediaQuery));
             });
         </script>
