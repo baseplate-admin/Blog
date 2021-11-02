@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Cantarell';
+    src: url("Cantarell-Regular.d0dae31262c5.ttf") format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cantarell';
+    src: url("Cantarell-Oblique.d3629456d536.ttf") format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cantarell';
+    src: url("Cantarell-BoldOblique.fbe74614f160.ttf") format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cantarell';
+    src: url("Cantarell-Bold.75f86fa7dc42.ttf") format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
