@@ -14,6 +14,7 @@
 .navbar-start > .button > p::before {
     content: '\00a0\00a0';
 }
+
 .navbar-start .button,
 .navbar-burger {
     transition: 0.2s;

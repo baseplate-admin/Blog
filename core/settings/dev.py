@@ -11,6 +11,7 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+WHITENOISE_MAX_AGE = 0
 
 try:
     from .local import *

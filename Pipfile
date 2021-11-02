@@ -6,14 +6,12 @@ name = "pypi"
 [packages]
 # Wagtail
 wagtail = "*" # <2.15,>=2.14.1
-wagtail-cache = "*" # Cache middleware
 # Django 
 django = "*" # 3.2.8
 whitenoise = {version = "*", extras = ["brotli"]} # Serve static files
 django-strip-whitespace = "*" # Minify html
 # Servers
-uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
-gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]} # To serve Gunicorn
+uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 black = "*"
@@ -25,6 +23,6 @@ python_version = "3.9"
 allow_prereleases = true
 
 [scripts]
-prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 collectstatic = "python ./manage.py collectstatic_rewired"
-dev = "python manage.py runserver"
+dev = "uvicorn core.asgi:application --reload"
+prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
