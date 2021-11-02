@@ -33,7 +33,7 @@ class Command(BaseCommand):
             if os.path.isfile(path):
                 self.count -= 1
 
-    def handle(self):
+    def handle(self,**kwargs):
         for file in self.json_data["paths"]:
             self.__remove_and_add(os.path.join(self.static_dir, file))
             self.__remove_and_add(os.path.join(self.static_dir, f"{file}.br"))
