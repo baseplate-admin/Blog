@@ -1,5 +1,4 @@
 from wagtail.core.models import Page
-from wagtailcache.cache import WagtailCacheMixin
 from django.db import models
 from wagtail.core.fields import StreamField
 
@@ -12,7 +11,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 # Create your models here.
 
 
-class Home(WagtailCacheMixin, Page):
+class Home(Page):
     max_count = 1
     subpage_types = [
         "blog.BlogList",  # appname.ModelName
