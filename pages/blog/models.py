@@ -49,7 +49,7 @@ class BlogList(Page):
         return context
 
 
-class BlogDetails(WagtailCacheMixin, Page):
+class BlogDetails(Page):
     # template = "blog/blog_details_page.html"
     parent_page_type = [
         "blog.BlogList",  # appname.ModelName

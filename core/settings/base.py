@@ -73,7 +73,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     ## Extra Django Middlewares
-    # "django.middleware.gzip.GZipMiddleware",
+    "django.middleware.gzip.GZipMiddleware",
     ## 3rd party middlewares
     "whitenoise.middleware.WhiteNoiseMiddleware",
     # Wagtail
@@ -173,6 +173,14 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": os.path.join(BASE_DIR, "cache"),
+        "KEY_PREFIX": "wagtailcache",
+        "TIMEOUT": 5,  # in seconds
+    }
+}
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "core"
@@ -188,3 +196,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # So we are using Libravatar. +1 for being Django Based too
 
 WAGTAIL_GRAVATAR_PROVIDER_URL = "//seccdn.libravatar.org/avatar/"
+
+STRIP_WHITESPACE_REGEX_FLAVOR = ["animejs", "alpinejs"]

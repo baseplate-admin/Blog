@@ -13,53 +13,49 @@
         <link
             async
             rel="stylesheet"
-            href="{% static 'core/fonts/Ubuntu/Ubuntu.css' %}"
+            href="https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css"
         />
 
         <link
             async
             rel="stylesheet"
-            href="{% static 'core/fonts/Cantarell/Cantarell.css' %}"
+            href="https://cdn.jsdelivr.net/npm/typeface-cantarell@1.1.13/index.min.css"
         />
         <link
             async
             rel="stylesheet"
-            href="{% static 'core/fonts/Roboto/Roboto.css' %}"
+            href="https://cdn.jsdelivr.net/npm/typeface-roboto@1.1.13/index.min.css"
         />
         <link
             async
             rel="stylesheet"
-            href="{% static 'core/fonts/Lato/Lato.css' %}"
+            href="https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css"
         />
 
         <link
             async
             rel="stylesheet"
-            href="{% static 'core/vendor/bulma/bulma.min.css' %}"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+            integrity="sha256-UDtbUHqpVVfXmdJcQVU/bfDEr9xldf3Dbd0ShD0Uf/Y="
+            crossorigin="anonymous"
         />
-
         <link
-            async
+            defer
             rel="stylesheet"
             defer
             href="{% static 'core/css/root.css' %}"
         />
         <link
-            async
+            defer
             rel="stylesheet"
             defer
             href="{% static 'core/css/main.css' %}"
         />
 
         <link
-            rel="stylesheet"
-            defer
-            href="{% static 'core/vendor/tippy/tippy.css' %}"
-        />
-        <link
             defer
             rel="stylesheet"
-            href="{% static 'core/vendor/progressive-image/progressive-image.css' %}"
+            href="https://cdn.jsdelivr.net/npm/progressive-image.js@1.6.1/dist/progressive-image.css"
         />
 
         {% block head %} {% endblock %}
@@ -69,49 +65,50 @@
 
         <script
             defer
-            src="{% static 'core/vendor/animejs/anime.min.js' %}"
+            src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"
+            integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY="
+            crossorigin="anonymous"
         ></script>
         <script
-            defer
             type="module"
-            src="{% static 'core/vendor/ionicons/ionicons.esm.js' %}"
+            src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
         ></script>
         <script
-            defer
             nomodule
-            src="{% static 'core/vendor/ionicons/ionicons.js' %}"
+            src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"
         ></script>
 
         <script
             defer
-            src="{% static 'core/vendor/particles.js/particles.min.js' %}"
+            src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
         ></script>
 
         <script
             defer
-            src="{% static 'core/vendor/progressive-image/progressive-image.js' %}"
+            src="https://cdn.jsdelivr.net/npm/progressive-image.js@1.6.1/dist/progressive-image.js"
+        ></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.5/dist/tippy-bundle.umd.min.js"></script>
+
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/trap@3.5.0/dist/cdn.min.js"
+            integrity="sha256-LjeZnVoPpHu+fMjF0yT6+xBMIOp4N+UIeaoaQhWzbmo="
+            crossorigin="anonymous"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.5.0/dist/cdn.min.js"
+            integrity="sha256-GH2idS1T4uiyMQl4mJGLFMWN6eK9SSmPNeb2uyCXtAU="
+            crossorigin="anonymous"
         ></script>
 
         <script
             defer
-            src="{% static 'core/vendor/tippy/popper.min.js' %}"
-        ></script>
-        <script
-            defer
-            src="{% static 'core/vendor/tippy/tippy.umd.min.js' %}"
-        ></script>
-
-        <script
-            defer
-            src="{% static 'core/vendor/alpine/collapse.min.js' %}"
-        ></script>
-        <script
-            defer
-            src="{% static 'core/vendor/alpine/trap.min.js' %}"
-        ></script>
-        <script
-            defer
-            src="{% static 'core/vendor/alpine/alpine.min.js' %}"
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.5.0/dist/cdn.min.js"
+            integrity="sha256-citN+YndvSdYKmBlLh74TAbm0hKaXPOrawmO7Cu5WN4="
+            crossorigin="anonymous"
         ></script>
 
         <script>
