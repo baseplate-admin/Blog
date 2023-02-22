@@ -175,3 +175,4 @@ poetry.toml
 
 # Output
 output/
+seo_report.html

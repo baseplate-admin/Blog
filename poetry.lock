@@ -107,6 +107,20 @@ files = [
 ]
 
 [[package]]
+name = "djhtml"
+version = "3.0.1"
+description = "Django/Jinja template indenter"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "djhtml-3.0.1.tar.gz", hash = "sha256:076c2f35040a63dcc1333169d670c66a26769e8dbd9a74abf8405b0195db602c"},
+]
+
+[package.extras]
+dev = ["nox", "pre-commit"]
+
+[[package]]
 name = "docutils"
 version = "0.19"
 description = "Docutils -- Python Documentation Utilities"
@@ -390,21 +404,62 @@ pelican = ">=3.6"
 
 [[package]]
 name = "pelican-search"
-version = "1.0.2"
+version = "1.0.0"
 description = "Pelican plugin that indexes content and enables static site searches"
 category = "main"
 optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "pelican_search-1.0.2-py3-none-any.whl", hash = "sha256:ff39ba52c5731a60b5f973e58d8b4b983446c59123f45c5bfa04009ff8805172"},
-    {file = "pelican_search-1.0.2.tar.gz", hash = "sha256:902191ab76a2a6dc0b817e6e91b2fe6ab41dae24680208a4c29fd7e944764a15"},
-]
+python-versions = ">=3.6.2,<4.0"
+files = []
+develop = false
 
 [package.dependencies]
 pelican = ">=4.5"
 
 [package.extras]
 markdown = ["markdown (>=3.2)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/micansid/search.git"
+reference = "HEAD"
+resolved_reference = "f76b89a9c3eb226d94e27ebd787fa58b5a0804ba"
+
+[[package]]
+name = "pelican-seo"
+version = "1.2.2"
+description = "Pelican plugin to improve SEO (Search Engine Optimization) to reach top positions on search engines."
+category = "main"
+optional = false
+python-versions = ">=3.6.2,<4.0"
+files = [
+    {file = "pelican-seo-1.2.2.tar.gz", hash = "sha256:dd86aedf1bb2cbdb32bdcade3e95be95bf18ca85947ad610099c864119100498"},
+    {file = "pelican_seo-1.2.2-py3-none-any.whl", hash = "sha256:98c0c6f30510e4f5b52343abf8c1da2bee8b52b206a3682891a6e830dc2e3215"},
+]
+
+[package.dependencies]
+beautifulsoup4 = ">=4.9,<5.0"
+pelican = ">=4.5"
+
+[package.extras]
+markdown = ["markdown (>=3.2)"]
+
+[[package]]
+name = "pelican-sitemap"
+version = "1.0.2"
+description = "Pelican plugin to generate sitemap in plain-text or XML format"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+files = [
+    {file = "pelican-sitemap-1.0.2.tar.gz", hash = "sha256:464052dbbf3daa7183c531c486e3db872f8f74b5fcc7aa25743b7c9aefbb359a"},
+    {file = "pelican_sitemap-1.0.2-py3-none-any.whl", hash = "sha256:ec930ee8182d4b905a4e5732d0b87ad84ee62ee1830b42d1b1f82bcac8e12f2b"},
+]
+
+[package.dependencies]
+pelican = ">=4.5,<5.0"
+
+[package.extras]
+markdown = ["markdown (>=3.2.2,<4.0.0)"]
 
 [[package]]
 name = "platformdirs"
@@ -553,4 +608,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f183cab354c1db3e6b21a86d80d1cbd0242aba26f17bcb85e95c00176399b142"
+content-hash = "65f811919d396c48453eccc00e67a9d32f3df60859eff79665cd811d98d198cc"

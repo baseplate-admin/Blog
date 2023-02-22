@@ -8,16 +8,19 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 pelican = {extras = ["markdown"], version = "^4.8.0"}
-pelican-search = "^1.0.2"
+pelican-search = {git = "https://github.com/micansid/search.git"}
 pelican-neighbors = "^1.2.0"
 pelican-readtime = "^0.2.0"
 beautifulsoup4 = "^4.11.2"
+pelican-sitemap = "^1.0.2"
+pelican-seo = "^1.2.2"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
 poethepoet = "^0.18.1"
 ghp-import = "^2.1.0"
+djhtml = "^3.0.1"
 
 
 [build-system]
@@ -25,5 +28,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
-dev = 'pelican --autoreload --listen --ignore-cache'
-content = 'pelican content'
+dev = 'pelican --autoreload --listen --ignore-cache -s pelicanconf.py'
+content = 'pelican content --ignore-cache -s publishconf.py --verbose'

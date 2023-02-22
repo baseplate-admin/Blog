@@ -1,27 +1,22 @@
 AUTHOR = "Baseplate-Admin"
 SITENAME = "Blog"
-# SITEURL = "https://baseplate-admin.github.io/blog"
 SITEURL = ""
 
-SUBTITLE = "Papyrus"
-SUBTEXT = """A fast and responsive theme built for the <a class="underline" 
-href="https://blog.getpelican.com/">Pelican</a> site generator.<br>
-The theme is inspired from <a class="underline" 
-href="https://github.com/adityatelange/hugo-PaperMod">Hugo-PaperMod</a>. 
-It is styled using <a class="underline" 
-href="https://tailwindcss.com/">Tailwind CSS</a>. 
-It supports dark mode and built in search function.
+SUBTITLE = "Baseplate Admin's Blog"
+SUBTEXT = """This is a place where I document my thoughths
+about <b>world</b>, <b>software</b> and things around me
 """
 COPYRIGHT = "©2023"
 PATH = "content"
 THEME = "themes/Papyrus"
-TIMEZONE = 'Asia/Dhaka'
+TIMEZONE = "Asia/Dhaka"
 THEME_STATIC_PATHS = ["static"]
 DEFAULT_LANG = "en"
 PLUGIN_PATHS = ["pelican-plugins"]
 PLUGINS = [
+    "sitemap",
     "readtime",
-    # "search", # Cant install on windows
+    "search",  # Cant install on windows
     "neighbors",
     "pelican-toc",
 ]
@@ -71,13 +66,63 @@ LINKS = (
     ("You can modify those links in your config file", "#"),
 )
 
+# Modify paths
+# https://github.com/getpelican/pelican/discussions/3076#discussioncomment-4477731
+ARTICLE_PATHS = ["articles"]
+PAGE_PATHS = ["pages"]
+# TEMPLATE_PAGES = {
+#     # About page
+#     "static_pages/about.html": "about.html",
+# }
+
 # Social widget
-SOCIAL = (
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
-)
+SOCIAL = {
+    ("github", "https://github.com/baseplate-admin/blog/"),
+    ("reddit", "https://www.reddit.com/user/BasePlate_Admin/"),
+    ("twitter", "https://twitter.com/__baseplate__"),
+}
+
+SHARE = {
+    ("twitter", "https://twitter.com/intent/tweet/?text=Features&amp;url="),
+    ("linkedin", "https://www.linkedin.com/sharing/share-offsite/?url="),
+    ("reddit", "https://reddit.com/submit?url="),
+    ("facebook", "https://facebook.com/sharer/sharer.php?u="),
+    ("whatsapp", "https://api.whatsapp.com/send?text=Features - "),
+    ("telegram", "https://telegram.me/share/url?text=Features&amp;url="),
+}
+
 
 DEFAULT_PAGINATION = 8
+
+MARKDOWN = {
+    "extension_configs": {
+        "markdown.extensions.toc": {
+            "permalink": "True",
+        },
+        "markdown.extensions.codehilite": {"css_class": "highlight"},
+        "markdown.extensions.extra": {},
+        "markdown.extensions.meta": {},
+    },
+    "output_format": "html5",
+}
+# Sitemap
+SITEMAP = {
+    "format": "xml",
+    "priorities": {
+        "articles": 0.1,
+        "indexes": 0.1,
+        "pages": 0.1,
+    },
+    "changefreqs": {
+        "articles": "daily",
+        "indexes": "daily",
+        "pages": "daily",
+    },
+}
+
+# https://github.com/getpelican/pelican/issues/2497#issuecomment-453388761
+DEFAULT_DATE = "fs"
+
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
