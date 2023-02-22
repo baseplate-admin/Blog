@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "blog"
+version = "0.1.0"
+description = ""
+authors = ["baseplate-admin <61817579+baseplate-admin@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pelican = {extras = ["markdown"], version = "^4.8.0"}
+pelican-search = "^1.0.2"
+pelican-neighbors = "^1.2.0"
+pelican-readtime = "^0.2.0"
+beautifulsoup4 = "^4.11.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
