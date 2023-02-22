@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <title>How i fixed `htmx` `redeclaration of let ` with `hx-boost=true`</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/css/pygment.css" />
+    <link rel="stylesheet" href="/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)"
+        href="/theme/css/stork-dark.css">
+    <link
+        href="/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Blog Atom Feed" />
+<meta name="description" content="Background : htmx is gaining popularity in django ecosystem. For example, I have created my latest project with django + htmx. The sites user page..." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <script type='module'>
+        import flamethrower from 'https://cdn.jsdelivr.net/npm/flamethrower-router@0.0.0-meme.12/+esm'
+        const router = flamethrower({ prefetch: 'visible' });
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="/">Blog</a></h1>
+            <button id="theme-toggle" type="button"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a                     href="/categories.html">Categories</a></li>
+            <li class="mr-4 pt-6"><a  href="/tags.html">Tags</a></li>
+            <li class="mr-4 pt-6"><a  href="/search.html">Search</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="/category/django.html">Django</a>
+                </li>
+                <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">How i fixed `htmx` `redeclaration of let <element>` with `hx-boost=true`</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>February 22, 2023</time>
+        <div>
+          <span>&nbsp;·&nbsp;10 min read</span>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Baseplate-Admin</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <details class="flex flex-col my-6 p-4 bg-zinc-200 dark:bg-zinc-800 rounded-lg">
+    <summary class="text-lg font-bold">Table of contents</summary>
+    <div class="mx-4 px-4 underline">
+      <div id="toc"><ul><li><a class="toc-href" href="#background" title="Background :">Background :</a></li><li><a class="toc-href" href="#the-problem" title="The problem :">The problem :</a></li><li><a class="toc-href" href="#digging-deeper" title="Digging deeper :">Digging deeper :</a></li><li><a class="toc-href" href="#the-solution" title="The Solution :">The Solution :</a></li><li><a class="toc-href" href="#moving-forward" title="Moving forward :">Moving forward :</a></li></ul></div>
+    </div>
+  </details>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-gray-500
+              dark:prose-a:text-gray-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              ">
+    <h1 id="background">Background :</h1>
+<p><code>htmx</code> is gaining popularity in <code>django</code> ecosystem. For example, I have created my latest <a href="https://github.com/baseplate-admin/CoreProject/">project</a> with <code>django</code> + <code>htmx</code>. The sites user page was previously written using <a href="https://github.com/baseplate-admin/CoreProject/tree/dbe619fe24f786042a23d77a7025fcf28bdc5242/frontend/User"><code>svelte</code></a> but I was not using <code>django</code> to it's full capability. Thats when i started rewriting <code>user</code> in <code>django</code> + <code>django_cripsy_forms</code></p>
+<h1 id="the-problem">The problem :</h1>
+<p>When i was writing the user code in django i planned to do realtime lookup of username availablity. So thats what i did.</p>
+<p>Heres the django code :</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">extends</span> <span class="s1">'user/base.html'</span> <span class="cp">%}</span>
+<span class="cm">&lt;!--prettier-ignore--&gt;</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span><span class="w"> </span>Sign<span class="w"> </span>Up<span class="w"> </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="cm">&lt;!--prettier-ignore--&gt;</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">crispy_forms_tags</span> <span class="nv">static</span> <span class="cp">%}</span>
+
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">form</span> <span class="cp">%}</span>
+
+<span class="nt">&lt;form</span><span class="w"> </span><span class="na">method=</span><span class="s">"post"</span><span class="w"> </span><span class="na">action=</span><span class="s">"</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'signup_view'</span> <span class="cp">%}</span><span class="s">"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">"flex justify-center mb-10"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">"font-bold text-4xl select-none flex"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-white"</span><span class="nt">&gt;</span>c<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-warning"</span><span class="nt">&gt;</span>o<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-white"</span><span class="nt">&gt;</span>r<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-white"</span><span class="nt">&gt;</span>e<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="ni">&amp;nbsp;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>p<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>r<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>o<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>j<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>e<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>c<span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">"inline-flex text-info"</span><span class="nt">&gt;</span>t<span class="nt">&lt;/span&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/div&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/div&gt;</span>
+<span class="w">    </span><span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">"grid gap-6"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="cp">{%</span> <span class="k">crispy</span> <span class="nv">form</span> <span class="cp">%}</span>
+<span class="w">        </span><span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">"flex justify-center items-center gap-2"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;button</span>
+<span class="w">                </span><span class="na">class=</span><span class="s">"btn btn-secondary font-bold text-black"</span>
+<span class="w">                </span><span class="na">type=</span><span class="s">"submit"</span>
+<span class="w">            </span><span class="nt">&gt;</span>
+<span class="w">                </span>Register
+<span class="w">            </span><span class="nt">&lt;/button&gt;</span>
+<span class="w">            </span>or
+<span class="w">            </span><span class="nt">&lt;a</span><span class="w"> </span><span class="na">class=</span><span class="s">"underline"</span><span class="w"> </span><span class="na">href=</span><span class="s">"</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'login_view'</span> <span class="cp">%}</span><span class="s">"</span><span class="w"> </span><span class="na">hx-boost=</span><span class="s">"true"</span>
+<span class="w">                </span><span class="nt">&gt;</span>login<span class="nt">&lt;/a</span>
+<span class="nt">            &gt;</span>
+<span class="w">        </span><span class="nt">&lt;/div&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="cm">&lt;!--This is the problem code block--&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="w">    </span>let<span class="w"> </span>el<span class="w"> </span>=<span class="w"> </span>document.querySelector('#id_username');
+
+<span class="w">    </span>el.addEventListener('input',<span class="w"> </span>async<span class="w"> </span>()<span class="w"> </span>=&gt;<span class="w"> </span>{});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</code></pre></div>
+<p>Soon enough i was running into this error.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">Uncaught</span><span class="w"> </span><span class="nx">SyntaxError</span><span class="o">:</span><span class="w"> </span><span class="kt">redeclaration</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nx">el</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/user/login/ line 1 &gt; injectedScript:1</span>
+<span class="w">    </span><span class="nx">ct</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ht</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ht</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">setTimeout</span><span class="w"> </span><span class="nx">handler</span><span class="o">*</span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">fr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">onload</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">lr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">i</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ze</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ze</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">pt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">mt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">mt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">setTimeout</span><span class="w"> </span><span class="nx">handler</span><span class="o">*</span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">fr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">onload</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">lr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">i</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ze</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ze</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">pt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">mt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">mt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">setTimeout</span><span class="w"> </span><span class="nx">handler</span><span class="o">*</span><span class="nx">o</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">fr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">onload</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">lr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">i</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ze</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">ze</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Ue</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">pt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">mt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">Y</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">mt</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="nx">pr</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000/static/js/htmx/htmx.min.js:1</span>
+<span class="nx">line</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">injectedScript</span><span class="o">:</span><span class="kt">1</span><span class="o">:</span><span class="mf">1</span>
+</code></pre></div>
+<p>This was something i never ran into before. As <code>HTMX</code> was quite new i didn't find much resource on this weird error. I asked on their <a href="https://discord.com/channels/725789699527933952/864934037381971988/1077471927989440574">discord channel</a> about this particular error ( this wasn't that uncommon as another user reported this error on their discord <a href="https://discord.com/channels/725789699527933952/1066354856643809400/1066354859001008229">thread</a> ). But i didn't find any response. Do i started digging deeper into this mess.</p>
+<p>At a glance nothing seemed wrong ( I wrote couple project in <code>react</code>, <code>svelte</code> | So i had a good understanding of JS ).. Maybe because i was not familiar with <code>django</code> and <code>html</code> I thought. I have never stumbled upon this error in my life before.</p>
+<h1 id="digging-deeper">Digging deeper :</h1>
+<p>So after a while I thought of removing <code>htmx</code> and just doing things the plain <code>django</code> way. Things started to work nicely again. So was it related to <code>htmx</code> afterall? <code>htmx</code> for those of you dont know does things in a particular way.</p>
+<ol>
+<li>It fetches the anchor tags <code>html</code>.</li>
+<li>Replaces <code>body</code> with said <code>html</code>.</li>
+<li>Re executes <code>scripts</code> inside those <code>body</code> tags.</li>
+</ol>
+<p>So naturally i thought of disabling execution of <code>script</code> tags by moving the scripts to the <code>head</code>. It worked :D.</p>
+<p>But according to htmx author. After <code>2.0</code> release <code>htmx</code> would re execute the scripts on the head. At the time of writing there is <a href="https://htmx.org/extensions/head-support/"><code>head-support</code></a> extension that enables said functionality and it was to be merged into htmx by <code>2.0</code> release.</p>
+<h1 id="the-solution">The Solution :</h1>
+<p>So i was out of hope at this point. Then i stumbled upon this <a href="https://stackoverflow.com/a/13626288">stackoverflow thread</a> ( god bless stackoverflow ). Here i learned about scoping functions. I was familiar with function scoping back in my <code>react</code> days as <code>react</code> didn't support top level await codes and i had to do something like this :</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="p">})();</span>
+</code></pre></div>
+<p>So i modified my code like this :</p>
+<div class="highlight"><pre><span></span><code><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#id_username'</span><span class="p">);</span>
+<span class="p">})();</span>
+</code></pre></div>
+<p>and the error was fixed.</p>
+<h1 id="moving-forward">Moving forward :</h1>
+<p>If you see the pages source. You can see that the site feels like an SPA ( Single Page Application ) even though its a static site. Thats because the site is using a small <code>JavaScript</code> library called <code>flamethower-router</code> ( for those of you who follow <code>fireship.io</code> you guys should know what this is ). But i ran into the exact same error that i faced with <code>htmx</code> ( maybe its the issue with these frontend routers ). So i modified the theme's original script to be block scoped.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">themeToggleDarkIcon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'theme-toggle-dark-icon'</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">themeToggleLightIcon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span>
+<span class="w">        </span><span class="s1">'theme-toggle-light-icon'</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'dark'</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">            </span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">'(prefers-color-scheme: dark)'</span><span class="p">).</span><span class="nx">matches</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">themeToggleLightIcon</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'hidden'</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">themeToggleDarkIcon</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'hidden'</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">themeToggleBtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'theme-toggle'</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">themeToggleBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">themeToggleDarkIcon</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">'hidden'</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">themeToggleLightIcon</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">'hidden'</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'light'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">,</span><span class="w"> </span><span class="s1">'dark'</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">,</span><span class="w"> </span><span class="s1">'light'</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">,</span><span class="w"> </span><span class="s1">'light'</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'color-theme'</span><span class="p">,</span><span class="w"> </span><span class="s1">'dark'</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">})();</span>
+</code></pre></div>
+<p>Moving forward I hope to see more sites powered using a frontend <code>SPA</code> router and finally put an end to the pesky page refresh.</p>
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 rounded-l-lg"></div>
+    </div>
+  </footer>
+  <div>
+  </div>
+</main>
+
+    </div>
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
+        <div class="px-4">
+            <span>©2023&nbsp;&#8226;&nbsp;</span>Powered by
+            <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;&
+            <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        </div>
+    </footer>
+
+
+    <script>
+        (()=>{
+            let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                    '(prefers-color-scheme: dark)').matches)) {
+                themeToggleLightIcon.classList.remove('hidden');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+            }
+            let themeToggleBtn = document.getElementById('theme-toggle');
+            themeToggleBtn.addEventListener('click', function () {
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+        })()
+    </script>
+</body>
+
+</html>
