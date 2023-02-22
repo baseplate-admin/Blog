@@ -1,7 +1,7 @@
 AUTHOR = "Baseplate-Admin"
 SITENAME = "Blog"
-SITEURL = "https://baseplate-admin.github.io/blog"
-# SITEURL = ""
+# SITEURL = "https://baseplate-admin.github.io/blog"
+SITEURL = ""
 
 SUBTITLE = "Papyrus"
 SUBTEXT = """A fast and responsive theme built for the <a class="underline" 
