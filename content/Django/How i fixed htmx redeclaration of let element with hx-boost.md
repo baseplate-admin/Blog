@@ -179,7 +179,11 @@ and the error was fixed.
 
 # Moving forward :
 
-If you see the pages source. You can see that the site feels like an SPA ( Single Page Application ) even though its a static site. Thats because the site is using a small `JavaScript` library called `flamethower-router` ( for those of you who follow `fireship.io` you guys should know what this is ). But i ran into the exact same error that i faced with `htmx` ( maybe its the issue with these frontend routers ). So i modified the theme's original script to be block scoped.
+If you see the pages source. You can see that the site feels like an SPA ( Single Page Application ) even though its a static site. Thats because the site is using a small `JavaScript` library called `flamethower-router` ( for those of you who follow `fireship.io` you guys should know what this is ).
+
+But i ran into the exact same error that i faced with `htmx` ( maybe its the issue with these frontend routers ).
+
+So i modified the theme's [original script](https://github.com/aleylara/Papyrus/blob/a38df10b27367b5f5fe6c477f7b7ccdb772fa1e9/templates/base.html#L216-L245) to be block scoped.
 
 ```typescript
 (() => {
