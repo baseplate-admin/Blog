@@ -14,7 +14,7 @@ It supports dark mode and built in search function.
 COPYRIGHT = "©2023"
 PATH = "content"
 THEME = "themes/Papyrus"
-TIMEZONE = "Asia/Dhaka"
+TIMEZONE = 'Asia/Dhaka'
 THEME_STATIC_PATHS = ["static"]
 DEFAULT_LANG = "en"
 PLUGIN_PATHS = ["pelican-plugins"]
