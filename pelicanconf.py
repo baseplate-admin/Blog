@@ -1,5 +1,6 @@
 AUTHOR = "Baseplate-Admin"
 SITENAME = "Blog"
+# SITEURL = "https://baseplate-admin.github.io/blog"
 SITEURL = ""
 
 SUBTITLE = "Papyrus"
@@ -14,7 +15,7 @@ It supports dark mode and built in search function.
 COPYRIGHT = "©2023"
 PATH = "content"
 THEME = "themes/Papyrus"
-TIMEZONE = "Asia/Dhaka"
+TIMEZONE = 'Asia/Dhaka'
 THEME_STATIC_PATHS = ["static"]
 DEFAULT_LANG = "en"
 PLUGIN_PATHS = ["pelican-plugins"]
