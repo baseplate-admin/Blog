@@ -1,8 +1,0 @@
-:root {
-    --html-color: black;
-    --navbar-color: black;
-    --border-color: #353333;
-    --button-border-color: hsl(0, 0%, 20%);
-    --button-color-hover: hsl(0, 0%, 5%);
-    --error-message-color: hsl(348.1, 85.9%, 61%);
-}
