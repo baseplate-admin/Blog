@@ -232,3 +232,5 @@ So I modified the theme's [original script](https://github.com/aleylara/Papyrus/
 ```
 
 Moving forward I hope to see more sites powered using a frontend `SPA` router and finally put an end to the pesky page refresh.
+
+— Baseplate-admin
