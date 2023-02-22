@@ -9,7 +9,6 @@
     <title>{% block title %} {{ SITENAME }} {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
-    <script src=" https://cdn.jsdelivr.net/npm/flamethrower-router@0.0.0-meme.12/dist/main.min.js "></script>
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/main.css" />
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/pygment.css" />
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/stork.css">
@@ -34,6 +33,10 @@
         } else {
             document.documentElement.classList.remove('dark')
         }
+    </script>
+    <script type='module'>
+        import flamethrower from 'https://cdn.jsdelivr.net/npm/flamethrower-router@0.0.0-meme.12/+esm'
+        const router = flamethrower({ prefetch: 'visible' });
     </script>
 </head>
 
@@ -214,36 +217,38 @@
     {% include 'disqus_script.html' %}
 
     <script>
-        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
-        } else {
-            themeToggleDarkIcon.classList.remove('hidden');
-        }
-        let themeToggleBtn = document.getElementById('theme-toggle');
-        themeToggleBtn.addEventListener('click', function () {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
+        (()=>{
+            let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                    '(prefers-color-scheme: dark)').matches)) {
+                themeToggleLightIcon.classList.remove('hidden');
             } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
+                themeToggleDarkIcon.classList.remove('hidden');
             }
-        });
+            let themeToggleBtn = document.getElementById('theme-toggle');
+            themeToggleBtn.addEventListener('click', function () {
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+        })()
     </script>
     {% if current == "search" %}
     <script src="https://files.stork-search.net/releases/v1.4.2/stork.js"></script>
