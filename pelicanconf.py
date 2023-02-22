@@ -16,7 +16,7 @@ PATH = "content"
 THEME = "themes/Papyrus"
 TIMEZONE = "Asia/Dhaka"
 THEME_STATIC_PATHS = ["static"]
-DEFAULT_LANG = "English"
+DEFAULT_LANG = "en"
 PLUGIN_PATHS = ["pelican-plugins"]
 PLUGINS = [
     "readtime",

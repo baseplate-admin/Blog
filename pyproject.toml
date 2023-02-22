@@ -16,7 +16,13 @@ beautifulsoup4 = "^4.11.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
+poethepoet = "^0.18.1"
+
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+dev = 'pelican --autoreload --listen --ignore-cache'
+content = 'pelican content'
