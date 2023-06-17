@@ -156,11 +156,11 @@ So your milage may vary on this front ( should all of your `hyperlinks` work dep
 
 For me the `hx-boost` worked with my stack :
 
--   Django **<i class="fa fa-brands fa-python"></i>**
--   Tailwind **<i class="fa fa-brands fa-css3-alt"></i>**
--   HTMX **<i class="fa fa-duotone fa-code"></i>**
--   Alpine **<i class="fa fa-brands fa-js"></i>**
--   jQuery **<i class="fa fa-brands fa-js"></i>**
+-   **<i class="fa fa-brands fa-python"></i>** Django
+-   **<i class="fa fa-brands fa-css3-alt"></i>** Tailwind
+-   **<i class="fa fa-duotone fa-code"></i>** HTMX
+-   **<i class="fa fa-brands fa-js"></i>** Alpine
+-   **<i class="fa fa-brands fa-js"></i>** jQuery
 
 # Moving forward
 

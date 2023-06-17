@@ -38,8 +38,7 @@ PAGINATED_TEMPLATES = {
 }
 
 # Site search plugin
-SEARCH_MODE = "output"
-SEARCH_HTML_SELECTOR = "main"
+
 # Table of Content Plugin
 TOC = {
     "TOC_HEADERS": "^h[1-3]",  # What headers should be included in

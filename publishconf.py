@@ -20,6 +20,11 @@ CATEGORY_FEED_ATOM = "feeds/{slug}.atom.xml"
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
+STORK_INPUT_OPTIONS = {
+    'url_prefix': SITEURL,
+    'html_selector':'main',
+    'base_directory':'output'
+}
 
 # DISQUS_SITENAME = ""
 MICROSOFT_CLARITY = True
