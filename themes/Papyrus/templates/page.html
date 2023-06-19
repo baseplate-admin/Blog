@@ -21,7 +21,7 @@
                     prose-code:bg-zinc-200
                     prose-code:font-light
                     prose-img:rounded-md
-                ">
+                   ">
             {% import 'translations.html' as translations with context %}
             {{ translations.translations_for(page) }}
             {{ page.content }}
@@ -44,6 +44,7 @@
         <div>
             {% include 'disqus_script.html' %}
         </div>
+
     </main>
 
 {% endblock %}

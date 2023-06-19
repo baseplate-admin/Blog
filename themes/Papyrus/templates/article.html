@@ -82,7 +82,7 @@
         {% for tag in article.tags|sort %}
           <a href="{{ SITEURL }}/{{ tag.url }}">
             <li
-                class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+              class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
               {{ tag }}
             </li>
           </a>
@@ -131,5 +131,9 @@
       {% include 'disqus_script.html' %}
     </div>
   </main>
-
+  {% if GITHUB_ISSUE_URL %}
+    <div class='text-sm text-center mt-2'>
+      If you have see any problems in this article please raise <a href='{{ GITHUB_ISSUE_URL }}' class='underline'> an issue the github repository</a>
+    </div>
+  {% endif %}
 {% endblock %}

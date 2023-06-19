@@ -1,6 +1,7 @@
 AUTHOR = "Baseplate-Admin"
 SITENAME = "Blog"
 SITEURL = ""
+GITHUB_ISSUE_URL = 'https://github.com/baseplate-admin/Blog/issues'
 
 SUBTITLE = "Baseplate Admin's Blog"
 SUBTEXT = """This is a place where I document my thoughths
