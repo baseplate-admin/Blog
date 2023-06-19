@@ -1,6 +1,6 @@
 Title: How I added <code>daphne</code> server dectection to <code>wappalyzer</code>
 Date: 2023-2-23
-Tags: Django, Daphne, Wappalyzer
+Tags: django, daphne, wappalyzer
 
 Back in the end of 2021 I was really amazed by `wappalyzer`. This seemingly small piece of extension can detect what the backend is ( albeit not guranteed ).
 

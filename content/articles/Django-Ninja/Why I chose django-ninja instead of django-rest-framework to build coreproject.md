@@ -1,6 +1,6 @@
 Title: Why I chose <code>django-ninja</code> instead of <code>django-rest-framework</code> to build <code>coreproject</code>
 Date: 2023-6-17
-Tags: django-ninja, Django, Coreproject
+Tags: django-ninja, django, coreproject
 URL: why-i-chose-django-ninja-instead-of-django-rest-framework-to-build-coreproject.html
 
 `django-ninja` is a relatively new framework ( [first commit was in July 21, 2020](https://github.com/vitalik/django-ninja/commit/1b79e8de644aef247e0456daa3b566db70fe1c07) ). So you might ask why would you use it instead of something like `django-rest-framework` ( whose first commit was all the way back in [Dec 30,2011](https://github.com/vitormazzi/django-rest-framework/commit/650111dc8c0800e5b7d4c878c1d454657b68efca) ). Well I am glad that you asked this question. Let's talk about it.

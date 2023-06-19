@@ -1,6 +1,6 @@
 Title: How I fixed <code>htmx</code> <code>redeclaration of let element</code> with <code>hx-boost=true</code>
 Date: 2023-2-22
-Tags: HTMX, Django, Single Page Router
+Tags: htmx, django, single-page-router
 URL: how-i-fixed-htmx-redeclaration-of-let-element-with-hx-boosttrue.html
 
 `htmx` is gaining popularity in `django` ecosystem. For example, I have created my latest [project](https://github.com/baseplate-admin/CoreProject/) with `django` + `htmx`. The sites user page was previously written using [`svelte`](https://github.com/baseplate-admin/CoreProject/tree/dbe619fe24f786042a23d77a7025fcf28bdc5242/frontend/User) but I was not using `django` to it's full capability. ( `django templating language` is such a blessing | I dont even have to deal with tokens and refresh and all other nonsenses )
