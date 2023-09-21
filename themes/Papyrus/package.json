@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "autoprefixer": "^10.4.15",
+    "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.1",
     "postcss": "^8.4.30",
     "postcss-cli": "^10.1.0",
