@@ -17,7 +17,7 @@ pelican-search = "^1.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.12.1"
+black = "^24.1.0"
 poethepoet = "^0.24.4"
 ghp-import = "^2.1.0"
 djhtml = "^3.0.1"
