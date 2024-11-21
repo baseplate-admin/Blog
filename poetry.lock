@@ -427,12 +427,13 @@ markdown = ["markdown (>=3.2,<4.0)"]
 
 [[package]]
 name = "pelican-readtime"
-version = "0.2.0"
+version = "0.2.1"
 description = "Plugin for Pelican that computes average read time."
 optional = false
 python-versions = "*"
 files = [
-    {file = "pelican-readtime-0.2.0.tar.gz", hash = "sha256:e0e48e0abcb4b14a287cc24a89b236221e5999033ce81965004f03ff38aae9c5"},
+    {file = "pelican_readtime-0.2.1-py2.py3-none-any.whl", hash = "sha256:22497c9dc83554f188d13af6a362d023b2c6e811af703553d99dfc404c52feec"},
+    {file = "pelican_readtime-0.2.1.tar.gz", hash = "sha256:d83fda594e05ba53ade767d1d702b79f2b1074a2f09eda69380b1ea32b71598a"},
 ]
 
 [package.dependencies]
@@ -848,4 +849,4 @@ anyio = ">=3.0.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "7a11d5c9cf6170e7a2e38bcd541cbc4fe219dc8a872d4277c3e6ba40ef3ef783"
+content-hash = "762dafb63e98ad927d2d003a3d56dd9552868de96cf52cec3caaa6baa75926b2"
