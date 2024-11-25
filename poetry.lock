@@ -433,6 +433,7 @@ optional = false
 python-versions = "*"
 files = [
     {file = "pelican-readtime-0.2.0.tar.gz", hash = "sha256:e0e48e0abcb4b14a287cc24a89b236221e5999033ce81965004f03ff38aae9c5"},
+    {file = "pelican_readtime-0.2.0-py2.py3-none-any.whl", hash = "sha256:08a867f7a1a9fe729dd550c11911ee68a0ff73253f7dee2b5edf55b69a250430"},
 ]
 
 [package.dependencies]
@@ -508,13 +509,13 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.3.1)", "pytest-
 
 [[package]]
 name = "poethepoet"
-version = "0.29.0"
+version = "0.31.0"
 description = "A task runner that works well with poetry."
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "poethepoet-0.29.0-py3-none-any.whl", hash = "sha256:f8dfe55006dcfb5cf31bcb1904e1262e1c642a4502fee3688cbf1bddfe5c7601"},
-    {file = "poethepoet-0.29.0.tar.gz", hash = "sha256:676842302f2304a86b31ac56398dd672fae8471128d2086896393384dbafc095"},
+    {file = "poethepoet-0.31.0-py3-none-any.whl", hash = "sha256:5067c5adf9f228b8af1f3df7d57dc319ed8b3f153bf21faf99f7b74494174c3d"},
+    {file = "poethepoet-0.31.0.tar.gz", hash = "sha256:b1cffb120149101b02ffa0583c6e61dfee53953a741df3dabf179836bdef97f5"},
 ]
 
 [package.dependencies]
@@ -848,4 +849,4 @@ anyio = ">=3.0.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "7a11d5c9cf6170e7a2e38bcd541cbc4fe219dc8a872d4277c3e6ba40ef3ef783"
+content-hash = "dfec8100890babfd14d41f5350e985fdc9149a20d984d7ca94972c7abe44ceb6"
