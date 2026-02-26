@@ -20,7 +20,7 @@ pelican-search = "^1.1.0"
 black = "^26.1.0"
 poethepoet = "^0.42.0"
 ghp-import = "^2.1.0"
-djhtml = "^3.0.7"
+djhtml = "^3.0.10"
 
 
 [build-system]
