@@ -137,13 +137,14 @@ files = [
 
 [[package]]
 name = "djhtml"
-version = "3.0.7"
+version = "3.0.10"
 description = "Django/Jinja template indenter"
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "djhtml-3.0.7.tar.gz", hash = "sha256:558c905b092a0c8afcbed27dea2f50aa6eb853a658b309e4e0f2bb378bdf6178"},
+    {file = "djhtml-3.0.10-py3-none-any.whl", hash = "sha256:d6efbe6001008d730ede5c21944a427a76c901c6cd168c138e494d2a1091e0b9"},
+    {file = "djhtml-3.0.10.tar.gz", hash = "sha256:dd4ebf778d3b7da7a6e6970f7e66740f08ed7485485491b9a80527f526c838d9"},
 ]
 
 [package.extras]
@@ -992,4 +993,4 @@ anyio = ">=3.0.0"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "59e0395bd3ade9841164a9bb6af0f3e1a0a1259fb560b1f0bc94f81e602cc602"
+content-hash = "7841922688b7a98a857af1398f20b8097b36e2b4100bb13e69b4f96211dad0f6"
