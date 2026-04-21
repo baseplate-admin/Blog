@@ -152,14 +152,14 @@ dev = ["nox", "pre-commit"]
 
 [[package]]
 name = "docutils"
-version = "0.20.1"
+version = "0.22.4"
 description = "Docutils -- Python Documentation Utilities"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "docutils-0.20.1-py3-none-any.whl", hash = "sha256:96f387a2c5562db4476f09f13bbab2192e764cac08ebbf3a34a95d9b1e4a59d6"},
-    {file = "docutils-0.20.1.tar.gz", hash = "sha256:f08a4e276c3a1583a86dce3e34aba3fe04d02bba2dd51ed16106244e8a923e3b"},
+    {file = "docutils-0.22.4-py3-none-any.whl", hash = "sha256:d0013f540772d1420576855455d050a2180186c91c15779301ac2ccb3eeb68de"},
+    {file = "docutils-0.22.4.tar.gz", hash = "sha256:4db53b1fde9abecbb74d91230d32ab626d94f6badfc575d6db9194a49df29968"},
 ]
 
 [[package]]
@@ -418,24 +418,24 @@ tests = ["pytest (>=9)", "typing-extensions (>=4.15)"]
 
 [[package]]
 name = "pelican"
-version = "4.11.0.post0"
+version = "4.12.0"
 description = "Static site generator supporting Markdown and reStructuredText"
 optional = false
-python-versions = "<4.0,>=3.9"
+python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "pelican-4.11.0.post0-py3-none-any.whl", hash = "sha256:522a26598d3555a48b8392a582843f96bc9dafd5efe16b8f6a0b292441290620"},
-    {file = "pelican-4.11.0.post0.tar.gz", hash = "sha256:0d5e9c0cc9c6713ab6c25b2c4b64844f34d9be8c8c8cc7f42c3a8aa6b3bbbe33"},
+    {file = "pelican-4.12.0-py3-none-any.whl", hash = "sha256:3697230f56cfcca9e98d3ac9ac26f655bb20cad807f7eacf156601e241f69ad8"},
+    {file = "pelican-4.12.0.tar.gz", hash = "sha256:3983b5d2dc84c7bdf967154359077a2b78c0bbd2f7dcc55292133a7779609458"},
 ]
 
 [package.dependencies]
 blinker = ">=1.7.0"
-docutils = ">=0.20.1"
+docutils = ">=0.22.0"
 feedgenerator = ">=2.1.0"
 jinja2 = ">=3.1.2"
 markdown = {version = ">=3.1", optional = true, markers = "extra == \"markdown\""}
 ordered-set = ">=4.1.0"
-pygments = ">=2.16.1,<2.19.0"
+pygments = ">=2.16.1,<2.20.0"
 python-dateutil = ">=2.8.2"
 rich = ">=13.6.0"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
@@ -1007,4 +1007,4 @@ anyio = ">=3.0.0"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "c33ae22e478cf56329caa5a067a32388c2ba23a270888aa13a6c7cbc2bd0c11a"
+content-hash = "cf50cb0d4096ed1793cff6a4dd5c95d334e6675910192fae9375924d2b35fa83"
